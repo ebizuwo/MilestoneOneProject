@@ -1,6 +1,3 @@
-echo "pulling down the repo and initializing the directories"
-git clone https://github.com/ebizuwo/MilestoneOneProject.git
-
 echo "creating virtual environment"
 python3 -m venv venv
 echo "done"

@@ -49,3 +49,17 @@ Install with homebrew.
 $ brew install python
 ```
 make sure it is 3.7 or greater
+
+## To Install
+1. Navigate to your directory of choice
+```shell script
+$ cd [/path/to/your/code dir]
+```
+2. Clone the repository
+```shell script
+$ git clone https://github.com/ebizuwo/MilestoneOneProject.git
+```
+3. Run the setup script
+```shell script
+$ ./setupenv.sh
+```
