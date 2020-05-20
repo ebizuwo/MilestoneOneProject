@@ -17,6 +17,7 @@ def drop_columns(df, columns=[]):
     :return:
     """
     def create_cols(cols=[]):
+        # we add the states in here as well
         states = [s.name.lower() for s in us.states.STATES]
         return cols+states
 
@@ -30,7 +31,7 @@ def drop_columns(df, columns=[]):
                 continue
         return df
     # create some stuff to use
-    cols_to_drop = create_cols()
+    cols_to_drop = create_cols(cols=columns)
     indices_to_drop = range(1,13)
 
     # drop the columns
