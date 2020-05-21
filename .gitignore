@@ -5,4 +5,4 @@
 /data/
 /data_cleaned/
 /venv
-
+*.zip
