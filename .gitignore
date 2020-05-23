@@ -7,4 +7,4 @@
 /venv
 script.py
 __pycache__/
-
+*.zip
