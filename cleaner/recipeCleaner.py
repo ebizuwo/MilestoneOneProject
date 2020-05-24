@@ -49,7 +49,6 @@ def create_holidays():
     return [h.lower() for h in us_holidays]
 
 
-
 def user_selection(df):
     user_selected_columns = vs.ValueDropper(df.columns).initiate_selection()
     df = drop_the_columns(df, user_selected_columns)
@@ -67,7 +66,6 @@ def make_recipe_column(df):
     def apply_recipe_search(x):
         m = x==1
         return x[np.where(m,True,False)].index.to_list()
-
     df['recipe_ingredients'] = df.apply(apply_recipe_search, axis=1)
     return df
 

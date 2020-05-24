@@ -1,9 +1,7 @@
 /genvenv
 .DS_store
 .idea/
-/data
-/data/
-/data_cleaned/
+/data*
 /venv
 script.py
 __pycache__/
