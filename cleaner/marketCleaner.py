@@ -1,8 +1,7 @@
 import pandas as pd
 import datetime
 
-# read the file
-df = pd.read_csv('data/raw_ingredients/csv_market_data.csv')
+
 
 def drop_columns(df, columns):
     df = df.drop(columns = columns)
@@ -26,25 +25,35 @@ def write_file(df, f):
 def explode_product_list(df):
     return df.explode('Product_List')
 
-# drop columns
-df = drop_columns(df, ['Unnamed: 0', 'Address', 'Schedule'])
+def market_cleaner():
+    # read the file
+    df = pd.read_csv('data/raw_ingredients/csv_market_data.csv')
 
-# parse out lat long
-df = parse_lat_long(df)
+    # drop columns
+    df = drop_columns(df, ['Unnamed: 0', 'Address', 'Schedule'])
 
-# drop NaNs
-df = df.dropna()
+    # parse out lat long
+    df = parse_lat_long(df)
 
-# extract products into a list in one column
-df = split_products_list(df)
+    # drop NaNs
+    df = df.dropna()
 
-# drop other columns
-df = drop_columns(df, ['GoogleLink', 'Products'])
+    # extract products into a list in one column
+    df = split_products_list(df)
 
-# explode product list
-df = explode_product_list(df)
+    # drop other columns
+    df = drop_columns(df, ['GoogleLink', 'Products'])
 
-# write to file
-write_file(df, f'data_cleaned/market_data_cleaned_{datetime.datetime.now()}.csv')
+    # explode product list
+    df = explode_product_list(df)
+
+    # lower everything because its good practice
+    df['Product_List'] = df['Product_List'].str.lower()
+
+    # remove leading spaces
+    df['Product_List'] = df['Product_List'].str.strip()
+
+    # write to file
+    write_file(df, f'data_cleaned/market_data_cleaned.csv')
 
 
