@@ -29,5 +29,3 @@ nre.norm_recipe()
 # migrators
 mig.make_migrations()
 
-# if __name__ == '__main__':
-#     pass
