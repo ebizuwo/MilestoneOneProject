@@ -6,3 +6,5 @@
 script.py
 __pycache__/
 *.zip
+*/.ipynb_checkpoints/
+*/metastore_db/
