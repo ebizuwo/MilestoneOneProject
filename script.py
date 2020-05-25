@@ -2,6 +2,11 @@ import cleaner.recipeCleaner as rc
 import combiners.combineMarketUsda as comb
 import combiners.combineRawRecipe as combrawrec
 import cleaner.marketCleaner as mc
+import normalizers.masterRel as mr
+import normalizers.normMap as nma
+import normalizers.normRaw as nra
+import normalizers.normRecipe as nre
+import migrators.migrateSqlite as mig
 
 # consumers
 
@@ -15,7 +20,14 @@ mc.market_cleaner()
 comb.combineMarketUsda()
 combrawrec.combineRawRecipe()
 
+# normalizers
+mr.master_rel()
+nma.norm_map()
+nra.norm_raw()
+nre.norm_recipe()
 
+# migrators
+mig.make_migrations()
 
 # if __name__ == '__main__':
 #     pass
