@@ -139,11 +139,6 @@ class ClosestRecipe:
 
 
 
-cr = ClosestRecipe()
-lat_long = cr.zip_lookup_lat_long('30082')
-print(lat_long)
-print(cr.recipe_rank_avg_lat_long(lat_long))
-
 
 
 
