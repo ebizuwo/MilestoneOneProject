@@ -13,6 +13,12 @@ c = conn.cursor()
 # recipe_title
 # master_rel
 # recipe_rel
+# county_lat_long
+# county_names
+# county_rel
+# county_geo_id
+
+
 
 try:
     c.execute('''DROP TABLE lat_long''')
@@ -21,6 +27,10 @@ try:
     c.execute('''DROP TABLE recipe_title''')
     c.execute('''DROP TABLE master_rel''')
     c.execute('''DROP TABLE recipe_rel''')
+    c.execute('''DROP TABLE county_lat_long''')
+    c.execute('''DROP TABLE county_names''')
+    c.execute('''DROP TABLE county_rel''')
+    c.execute('''DROP TABLE county_geo_id''')
 except Exception as e:
     print(e)
 
@@ -76,6 +86,32 @@ c.execute('''CREATE TABLE recipe_rel
              FOREIGN KEY (uid_recipe_title) references recipe_title(uid_recipe_title))''')
 conn.commit()
 
+c.execute('''CREATE TABLE county_lat_long
+            (
+            uid_lat_long INTEGER PRIMARY KEY,
+            lat float,
+            long float)''')
+conn.commit()
+
+c.execute('''CREATE TABLE county_names
+             (
+             uid_county INTEGER PRIMARY KEY,
+             county_name text )''')
+conn.commit()
+
+c.execute('''CREATE TABLE county_rel
+             (
+             uid_lat_long INTEGER,
+             uid_county INTEGER,
+             FOREIGN KEY (uid_lat_long) references county_lat_long(uid_lat_long),
+             FOREIGN KEY (uid_county) references county_names(uid_county))''')
+conn.commit()
+
+c.execute('''CREATE TABLE county_geo_id
+             (
+             uid_lat_long INTEGER PRIMARY KEY,
+             geo_id INTEGER )''')
+conn.commit()
 
 # now add the csv to the tables pandas can do this yooooo
 
@@ -87,9 +123,15 @@ def sql_objs():
     recipe_title = 'data_normalized/recipe_title.csv'
     master_rel = 'data_normalized/master_rel.csv'
     recipe_rel = 'data_normalized/recipe_rel.csv'
+    county_lat_long = 'data_normalized/county_lat_long.csv'
+    county_names = 'data_normalized/county_names.csv'
+    county_rel = 'data_normalized/county_rel.csv'
+    county_geo_id = 'data_normalized/county_geo_id.csv'
 
-    files = [lat_long, raw_ings, recipe_ings, recipe_title, master_rel, recipe_rel]
-    tables = ['lat_long', 'raw_ings', 'recipe_ings', 'recipe_title', 'master_rel', 'recipe_rel']
+    
+
+    files = [lat_long, raw_ings, recipe_ings, recipe_title, master_rel, recipe_rel, county_lat_long, county_names, county_rel, county_geo_id]
+    tables = ['lat_long', 'raw_ings', 'recipe_ings', 'recipe_title', 'master_rel', 'recipe_rel', 'county_lat_long', 'county_names', 'county_rel', 'county_geo_id']
 
     sql_objs = zip(files,tables)
     return sql_objs

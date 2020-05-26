@@ -6,7 +6,9 @@ import normalizers.masterRel as mr
 import normalizers.normMap as nma
 import normalizers.normRaw as nra
 import normalizers.normRecipe as nre
+import normalizers.normCounties as nco
 import migrators.migrateSqlite as mig
+
 
 # consumers
 
@@ -25,6 +27,7 @@ mr.master_rel()
 nma.norm_map()
 nra.norm_raw()
 nre.norm_recipe()
+nco.county_shape()
 
 # migrators
 mig.make_migrations()
