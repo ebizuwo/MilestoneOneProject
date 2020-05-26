@@ -3,7 +3,7 @@ import sqlalchemy
 import pandas as pd
 
 # create database
-conn = sqlite3.connect('sqlite_db/farmtoface.db')  # You can create a new database by changing the name within the quotes
+conn = sqlite3.connect('app_project/farmtoface.db')  # You can create a new database by changing the name within the quotes
 c = conn.cursor()
 
 # create the tables we need
