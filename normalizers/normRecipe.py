@@ -36,7 +36,6 @@ def norm_recipe():
     # silly join sequence
     # join recipes onto recipe ings uid 71583 rows
     df_recipe_uid_recipes = join_df(df_recipe_uid, df_recipes, on='title')
-    print(df_recipe_uid_recipes)
 
     # join ing uid on previous 71583
     df_final_recipe_ing_uid = join_df(df_recipe_uid_recipes, df_recipe_ings_uid, on='recipe_ingredients')

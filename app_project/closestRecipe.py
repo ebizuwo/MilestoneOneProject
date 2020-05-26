@@ -105,9 +105,6 @@ class ClosestRecipe():
         return pd.merge(self.ranked_recipes, self.ranked_recipe_ingredients, on='uid_recipe_title')
 
 
-cr = ClosestRecipe('30082')
-print(cr.get_combined_rank_ings())
-
 
 
 

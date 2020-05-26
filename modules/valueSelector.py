@@ -27,7 +27,6 @@ class ValueDropper():
 
     def initiate_selection(self):
         vals = []
-        print(self.selected_vals)
         try:
             for v in self.q:
                 if v in self.selected_vals:
@@ -168,7 +167,6 @@ class ValueClassifier():
                 while True:
                     #TODO message constructor class
                     message = [
-                        ('class:all', f"\nHere is the comparison list {self.c}"),
                         ('class:all', f"\nClassifying {count} of {num} things"),
                         ('class:all', f"\nHere is a value "),
                         text,
