@@ -12,17 +12,21 @@ class ClosestRecipe:
     lat_long = None
     zip_ = None
     def __init__(self):
+        self.conn = None
         try:
-            self.conn = sqlite3.connect('sqlite_db/farmtoface.db')
-        except Exception as e:
-            print(e)
             self.conn = sqlite3.connect('farmtoface.db')
+            self.conn.create_function('haversine', 2, self.udf_haversine)
+        except Exception as e:
+            self.conn = sqlite3.connect('app_project/farmtoface.db')
+            self.conn.create_function('haversine', 2, self.udf_haversine)
+            print(e)
 
 
 
     def udf_haversine(self, lat, long):
         inglatlong = (lat, long)
         lat_long = self.lat_long
+        assert lat_long, 'lat long not set in class'
         try:
             return haversine(inglatlong, lat_long, Unit.MILES)
         except Exception as e:
@@ -40,7 +44,6 @@ class ClosestRecipe:
     def recipe_rank_zip(self, zip_):
         self.zip_ = zip_
         self.lat_long = self.zip_lookup_lat_long(zip_)
-        self.conn.create_function('haversine', 2, self.udf_haversine)
         query = """
             SELECT avg_dist, recipe_title as recipe, rt.uid_recipe_title
             FROM (SELECT AVG(ing_distance) as avg_dist, mind.uid_recipe_title
@@ -96,7 +99,6 @@ class ClosestRecipe:
 
     def recipe_rank_avg_lat_long(self, lat_long):
         self.lat_long = lat_long
-        self.conn.create_function('haversine', 2, self.udf_haversine)
         query = """
             SELECT AVG(avg_dist)
             FROM (SELECT AVG(ing_distance) as avg_dist, mind.uid_recipe_title
@@ -136,7 +138,6 @@ class ClosestRecipe:
     def connect_sqlite(self, conn):
         self.conn = conn
         return self
-
 
 
 
