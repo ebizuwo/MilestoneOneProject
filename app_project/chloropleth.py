@@ -4,6 +4,8 @@ import pandas as pd
 import numpy as np
 import json
 import folium
+import seaborn as sns
+import matplotlib.pyplot as plt
 
 
 def chloropleth():
@@ -37,3 +39,10 @@ def chloropleth():
     m.save('data_output/counties_mean_distance.html')
 
 
+def dist_plot(x,y):
+    #x = recipe_frame
+    #y = current_index
+    density = (y+1)/len(x)
+    mcdf = sns.kdeplot(x['mean_score'], cumulative=True, shade=True, color="b").set(
+        xlabel='recipe average distance', ylabel='% recipes closer')
+    plt.plot([y, y], [0, density])
