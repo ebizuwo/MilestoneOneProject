@@ -8,11 +8,11 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 class farm_vis:
-    #def __init__(self):
-    @staticmethod
+    def __init__(self):
+        pass
     
-    def chloropleth():
-        county_geo = 'data/location/US_counties.geojson'
+    def chloropleth(self):
+        county_geo = '../data/location/US_counties.geojson'
 
         df = gpd.read_file(county_geo, driver='GeoJSON')
 
@@ -39,10 +39,10 @@ class farm_vis:
                              key_on='feature.properties.GEOID',
                              columns = ['geo_id', 'mean_distance']
                              ) 
-        m.save('data_output/counties_mean_distance.html')
+        m.save('../data_output/counties_mean_distance.html')
 
 
-    def dist_plot(x,y):
+    def dist_plot(self,x,y):
         #x = recipe_frame
         #y = current_index
         density = (y+1)/len(x)
